@@ -1,50 +1,30 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   get_next_line.c                                  .::    .:/ .      .::   */
+/*   test.c                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: almalfoy <almalfoy@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/11/28 18:06:40 by almalfoy     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/10 19:46:38 by almalfoy    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/01/10 15:23:47 by almalfoy     #+#   ##    ##    #+#       */
+/*   Updated: 2018/01/10 16:05:45 by almalfoy    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdlib.h>
+#include <stdio.h>
 
-char *recup_line(char *buf)
+void    inc()
 {
-	int i;
-	char *str;
-	i = 0;
-	while (*buf++ != '\n')
-	{
-		*str = *buf;
-	}
-	return (str);
+	static int x;
+	printf("%d", x++);
 }
 
-
-
-int		get_next_line(const int fd, char **line)
+int		main()
 {
-	int				i;
-	int				ret_read;
-	static char		buf[BUF_SIZE + 1];
-
-	i = 0;
-	line = NULL;
-	if (fd != 0)
-		return (-1);
-	while ((ret_read = read(fd, buf, BUF_SIZE)))
-	{
-		buf[ret_read] = '\0';
-		while (*buf != '\n')
-		{
-			*line[i] = buf[i];
-			i++;
-		}
-	}
-	return (1);
+	inc();
+	inc();
+	inc();
+	return (0);
 }
