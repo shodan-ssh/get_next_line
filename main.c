@@ -6,7 +6,7 @@
 /*   By: almalfoy <almalfoy@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/02 14:27:05 by almalfoy     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/10 19:15:49 by almalfoy    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/11 16:50:11 by almalfoy    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,7 +23,6 @@ int		main(int argc, char **argv)
 	(void)argc;
 	(void)argv;
 	fd = 0;
-	printf("%d", get_next_line(fd, &line));
-	printf("%s", line);
+	printf("%d\n%s", get_next_line(fd, &line), line);
 	return (0);
 }
