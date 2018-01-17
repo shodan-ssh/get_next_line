@@ -6,7 +6,7 @@
 /*   By: almalfoy <almalfoy@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/28 18:06:40 by almalfoy     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/16 17:47:39 by almalfoy    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/17 17:41:40 by almalfoy    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,7 +26,7 @@ char	*recup_line(char *buf, char *line)
 		}
 }
 */
-
+/*
 int		ft_calc_size(char *buf)
 {
 	int size;
@@ -39,7 +39,7 @@ int		ft_calc_size(char *buf)
 	printf("size before %d\n", size);
 	return (size);
 }
-
+*/
 int		get_next_line(const int fd, char **line)
 {
 	int				ret_read;
@@ -50,30 +50,99 @@ int		get_next_line(const int fd, char **line)
 	i = 0;
 	line = NULL;
 	str = NULL;
-	/*while (buf[i] != '\n')
-	{
-		ret_read = read(fd, buf + i, BUF_SIZE);
-		i++;
-	}
-	printf("%s", buf);
-	*/
+	//if ((ret_read = read(fd, buf, BUF_SIZE)) == -1)
+	//	return (-1);
 	while ((ret_read = read(fd, buf, BUF_SIZE)))
 	{
 		buf[ret_read] = '\0';
-//		if (!(line = (char **)malloc(sizeof(**line) * (ft_calc_size(buf)))))
-//			return (-1);
-		/*while (i < BUF_SIZE && ret_read != 0 && buf[i] != '\n')
-		{
-
-			i++;
-		}
-		i = 0;
-	*/
+		//ft_putstr(buf);
 	}
-	//ft_putstr(*line);
+	ft_putstr(buf);
+
+	/*
+	while (buf[i++] != '\n')
+	{
+		printf("%c", buf[i]);
+	}*/
+	/*
+	while (line)
+	{
+		if (buf[i] == '\n')
+			return (&str);
+	}
+	*/
 	//ft_delim_line_break(buf, fd);
 	//if (!(str = (char *)malloc(sizeof(*str) * ())))
 	if (fd != 0)
 		return (-1);
 	return (1);
 }
+/*
+static int		ft_read(char **str, int fd)
+{
+	int		ret;
+	char	*s;
+	char	buf[BUFF_SIZE + 1];
+
+	if ((ret = read(fd, buf, BUFF_SIZE)) == -1)
+		return (-1);
+	buf[ret] = '\0';
+	s = *str;
+	*str = ft_strjoin(*str, buf);
+	if (*s != 0)
+		free(s);
+	return (ret);
+}
+
+static int		ft_get_line(char **str, char **line, char *s)
+{
+	int		i;
+	char	*join;
+
+	i = 0;
+	if (*s == '\n')
+		i = 1;
+	*s = 0;
+	*line = ft_strjoin("", *str);
+	if (i == 0 && ft_strlen(*str) != 0)
+	{
+		*str = ft_strnew(1);
+		return (1);
+	}
+	else if (i == 0 && !(ft_strlen(*str)))
+		return (0);
+	join = *str;
+	*str = ft_strjoin(s + 1, "");
+	free(join);
+	return (i);
+}
+
+int				get_next_line(int const fd, char **line)
+{
+	int			ret;
+	char		*s;
+	static char	*str;
+
+	if (str == 0)
+		str = "";
+	if (!line || BUFF_SIZE < 1)
+		return (-1);
+	ret = BUFF_SIZE;
+	while (line)
+	{
+		s = str;
+		while (*s || ret < BUFF_SIZE)
+		{
+			if (*s == '\n' || *s == 0 || *s == -1)
+				return (ft_get_line(&str, line, s));
+			s++;
+		}
+		ret = ft_read(&str, fd);
+		if (ret == -1)
+			return (-1);
+	}
+	return (0);
+}
+*/
+// ft_strjoin
+// ft_strnew
