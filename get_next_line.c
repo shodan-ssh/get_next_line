@@ -6,7 +6,7 @@
 /*   By: almalfoy <almalfoy@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/28 18:06:40 by almalfoy     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/19 11:53:12 by almalfoy    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/20 17:32:25 by almalfoy    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,28 +24,18 @@
    3 - strjoin *line ("") avec *strjoin
    4 - strlen de str pour repartir de la ou on en etait
 */
-int		ft_read(int fd)
-{
-	int		ret_read;
-	char	buf[BUF_SIZE + 1];
-
-	if ((ret_read = read(fd, buf, BUF_SIZE)) == -1)
-		return (-1);
-	buf[ret_read] = '\0';
-	return (ret_read);
-}
 /*
-char	*recup_line(char *buf, char *line)
+char	**ft_annihilation(char *stock_buf, char **line, int i)
 {
-	char 	*str;
-	int 	i;
-
-	i = 0;
-	while (*buf)
-		if (buf[i] == '\n')
+	while (stock_buf[i])
+	{
+		if (stock_buf[i] == '\n')
 		{
-			return (str)
+			*line = stock_buf;
+			return (line);
 		}
+	}
+	return (stock_buf);
 }
 */
 int		get_next_line(const int fd, char **line)
@@ -53,117 +43,34 @@ int		get_next_line(const int fd, char **line)
 	int				ret_read;
 	int				i;
 	char			buf[BUF_SIZE + 1];
-	int				deja_vu;
-	static char		**str;
+	char			**tmp;
+	static char		*stock_buf;
 
 	i = 0;
+	stock_buf = "";
 	line = NULL;
-	str = NULL;
-	deja_vu = 1;
-	//str = ft_strjoin(*str, buf);
-	/*if ((ret_read = read(fd, buf, BUF_SIZE)) == -1)
-		return (-1);*/
-	while ((ret_read = read(fd, buf, BUF_SIZE)) && deja_vu == 1)
+	while ((ret_read = read(fd, buf, BUF_SIZE)))
 	{
 		buf[ret_read] = '\0';
-		while (i < BUF_SIZE)
-		{
-			if (buf[i] == '\n')
-			{
-				//*str = buf;
-				deja_vu = 0;
-			}
-			i++;
-		}
-		i = 0;
-		//printf("%s", buf);
+		stock_buf = ft_strjoin(stock_buf, buf); // Stock tout le buf dans la var static
 	}
-	//*line = ft_strjoin("", *str);
-	printf("%s\n", *str);
-
-	/*
-	while (line)
+	stock_buf[ft_strlen(stock_buf)] = '\0';
+	//ft_annihilation(stock_buf, &line, i);
+	/*while (stock_buf[i++] != '\0')
 	{
-		if (buf[i] == '\n')
-			return (&str);
+		if (stock_buf[i] == '\n')
+		{
+			*line = stock_buf;
+		}
+	}*/
+	if (!(*line = (char **)malloc(sizeof(**line) * (ft_strlen(stock_buf)))))
+		return (NULL);
+	printf("%zu\n", ft_strlen(stock_buf));
+	ft_putstr(stock_buf);
+	while (stock_buf[i] != '\n')
+	{
+		*line[i] = stock_buf[i];
 	}
-	*/
-	//ft_delim_line_break(buf, fd);
+	printf("%s", *line);
 	return (1);
 }
-
-
-
-
-
-
-
-
-
-/*
-static int		ft_read(char **str, int fd)
-{
-	int		ret;
-	char	*s;
-	char	buf[BUFF_SIZE + 1];
-
-	if ((ret = read(fd, buf, BUFF_SIZE)) == -1)
-		return (-1);
-	buf[ret] = '\0';
-	s = *str;
-	*str = ft_strjoin(*str, buf);
-	if (*s != 0)
-		free(s);
-	return (ret);
-}
-
-static int		ft_get_line(char **str, char **line, char *s)
-{
-	int		i;
-	char	*join;
-
-	i = 0;
-	if (*s == '\n')
-		i = 1;
-	*s = 0;
-	*line = ft_strjoin("", *str);
-	if (i == 0 && ft_strlen(*str) != 0)
-	{
-		*str = ft_strnew(1);
-		return (1);
-	}
-	else if (i == 0 && !(ft_strlen(*str)))
-		return (0);
-	join = *str;
-	*str = ft_strjoin(s + 1, "");
-	free(join);
-	return (i);
-}
-
-int				get_next_line(int const fd, char **line)
-{
-	int			ret;
-	char		*s;
-	static char	*str;
-
-	if (str == 0)
-		str = "";
-	if (!line || BUFF_SIZE < 1)
-		return (-1);
-	ret = BUFF_SIZE;
-	while (line)
-	{
-		s = str;
-		while (*s || ret < BUFF_SIZE)
-		{
-			if (*s == '\n' || *s == 0 || *s == -1)
-				return (ft_get_line(&str, line, s));
-			s++;
-		}
-		ret = ft_read(&str, fd);
-		if (ret == -1)
-			return (-1);
-	}
-	return (0);
-}
-*/
