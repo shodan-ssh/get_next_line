@@ -6,7 +6,7 @@
 /*   By: almalfoy <almalfoy@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/28 18:06:57 by almalfoy     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/18 18:15:04 by almalfoy    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/22 18:45:01 by almalfoy    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,7 +18,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
-#define BUF_SIZE 2
+#define BUFF_SIZE 1
 
 int		get_next_line(const int fd, char **line);
 #endif

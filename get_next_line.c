@@ -6,7 +6,7 @@
 /*   By: almalfoy <almalfoy@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/28 18:06:40 by almalfoy     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/20 17:32:25 by almalfoy    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/22 18:47:29 by almalfoy    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,14 +25,14 @@
    4 - strlen de str pour repartir de la ou on en etait
 */
 /*
-char	**ft_annihilation(char *stock_buf, char **line, int i)
+char	*ft_annihilation(char *stock_buf, char **line, int i)
 {
 	while (stock_buf[i])
 	{
 		if (stock_buf[i] == '\n')
 		{
 			*line = stock_buf;
-			return (line);
+			return (&**line);
 		}
 	}
 	return (stock_buf);
@@ -41,36 +41,33 @@ char	**ft_annihilation(char *stock_buf, char **line, int i)
 int		get_next_line(const int fd, char **line)
 {
 	int				ret_read;
-	int				i;
-	char			buf[BUF_SIZE + 1];
-	char			**tmp;
+	static int		i;
+	char			buf[BUFF_SIZE + 1];
+	char			*tmp;
 	static char		*stock_buf;
 
 	i = 0;
 	stock_buf = "";
-	line = NULL;
-	while ((ret_read = read(fd, buf, BUF_SIZE)))
+	tmp = NULL;
+
+	while ((ret_read = read(fd, buf, BUFF_SIZE)))
 	{
 		buf[ret_read] = '\0';
 		stock_buf = ft_strjoin(stock_buf, buf); // Stock tout le buf dans la var static
 	}
 	stock_buf[ft_strlen(stock_buf)] = '\0';
-	//ft_annihilation(stock_buf, &line, i);
-	/*while (stock_buf[i++] != '\0')
-	{
-		if (stock_buf[i] == '\n')
-		{
-			*line = stock_buf;
-		}
-	}*/
-	if (!(*line = (char **)malloc(sizeof(**line) * (ft_strlen(stock_buf)))))
-		return (NULL);
-	printf("%zu\n", ft_strlen(stock_buf));
+	tmp = ((char *)malloc(sizeof(*tmp) * (ft_strlen(stock_buf) + 1)));
+	printf("%zu caracteres dans le fichier\n", ft_strlen(stock_buf));
 	ft_putstr(stock_buf);
 	while (stock_buf[i] != '\n')
 	{
-		*line[i] = stock_buf[i];
+		//*line[i] = stock_buf[i];
+		tmp[i] = stock_buf[i];
+		i++;
 	}
-	printf("%s", *line);
+	tmp[i] = '\0';
+	i++;
+	*line = tmp;
+	//printf("tmp -> %s\n", tmp);
 	return (1);
 }
