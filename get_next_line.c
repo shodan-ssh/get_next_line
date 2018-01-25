@@ -6,7 +6,7 @@
 /*   By: almalfoy <almalfoy@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/28 18:06:40 by almalfoy     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/22 18:47:29 by almalfoy    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/25 18:46:28 by almalfoy    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,60 +14,45 @@
 #include "get_next_line.h"
 
 // ft_strjoin
-// ft_strnew -> retourne une chaine fraiche avec
+// ft_strnew
+// ft_strsub -> Alloue avec malloc un troncon de chaine
 
+					/* Instruction GNL */
 
-					/* Instruction get_next_line */
+// Var tmp en static qui stock le fichier
 
-/* 1 - Lire l'entree standard
-   2 - Stocker jusqu'au '/n' dans *str
-   3 - strjoin *line ("") avec *strjoin
-   4 - strlen de str pour repartir de la ou on en etait
-*/
-/*
-char	*ft_annihilation(char *stock_buf, char **line, int i)
-{
-	while (stock_buf[i])
-	{
-		if (stock_buf[i] == '\n')
-		{
-			*line = stock_buf;
-			return (&**line);
-		}
-	}
-	return (stock_buf);
-}
-*/
-int		get_next_line(const int fd, char **line)
+char	*ft_read_stock(const int fd)
 {
 	int				ret_read;
-	static int		i;
 	char			buf[BUFF_SIZE + 1];
-	char			*tmp;
-	static char		*stock_buf;
+	char			*stock;
 
-	i = 0;
-	stock_buf = "";
-	tmp = NULL;
-
+	stock = "";
 	while ((ret_read = read(fd, buf, BUFF_SIZE)))
 	{
 		buf[ret_read] = '\0';
-		stock_buf = ft_strjoin(stock_buf, buf); // Stock tout le buf dans la var static
+		stock = ft_strjoin(stock, buf);
 	}
-	stock_buf[ft_strlen(stock_buf)] = '\0';
-	tmp = ((char *)malloc(sizeof(*tmp) * (ft_strlen(stock_buf) + 1)));
-	printf("%zu caracteres dans le fichier\n", ft_strlen(stock_buf));
-	ft_putstr(stock_buf);
-	while (stock_buf[i] != '\n')
-	{
-		//*line[i] = stock_buf[i];
-		tmp[i] = stock_buf[i];
+	stock[ft_strlen(stock)] = '\0';
+	printf("size = %zu\n", ft_strlen(stock));
+	return (stock);
+}
+
+int		get_next_line(const int fd, char **line)
+{
+
+	static int		i = 0;
+	int				start;
+	static char		*stock_buf;
+
+	start = i;
+	if (!(*line))
+		stock_buf = ft_read_stock(fd);
+	//printf("%s", stock_buf);
+	while (stock_buf[i] != '\n' && stock_buf[i])
 		i++;
-	}
-	tmp[i] = '\0';
+	*line = ft_strsub(stock_buf, start, i - start);
 	i++;
-	*line = tmp;
-	//printf("tmp -> %s\n", tmp);
+
 	return (1);
 }
