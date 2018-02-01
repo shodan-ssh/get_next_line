@@ -1,24 +1,34 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   get_next_line.h                                  .::    .:/ .      .::   */
+/*   ft_strncmp.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: almalfoy <almalfoy@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: almalfoy <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/11/28 18:06:57 by almalfoy     #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/01 15:06:42 by almalfoy    ###    #+. /#+    ###.fr     */
+/*   Created: 2017/11/23 11:00:26 by almalfoy     #+#   ##    ##    #+#       */
+/*   Updated: 2017/12/02 11:40:14 by almalfoy    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include "libft/libft.h"
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
+#include "libft.h"
 
-# define BUFF_SIZE 10
+int		ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t			i;
+	unsigned char	*r1;
+	unsigned char	*r2;
 
-int		get_next_line(const int fd, char **line);
-#endif
+	r1 = (unsigned char *)s1;
+	r2 = (unsigned char *)s2;
+	i = 0;
+	if (n == 0)
+		return (0);
+	while (*r1 && *r1 == *r2 && i < n - 1)
+	{
+		i++;
+		r1++;
+		r2++;
+	}
+	return (*r1 - *r2);
+}

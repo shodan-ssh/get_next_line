@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   get_next_line.h                                  .::    .:/ .      .::   */
+/*   ft_memccpy.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: almalfoy <almalfoy@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: almalfoy <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/11/28 18:06:57 by almalfoy     #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/01 15:06:42 by almalfoy    ###    #+. /#+    ###.fr     */
+/*   Created: 2017/11/23 10:48:26 by almalfoy     #+#   ##    ##    #+#       */
+/*   Updated: 2017/12/02 11:19:39 by almalfoy    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include "libft/libft.h"
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
+#include "libft.h"
 
-# define BUFF_SIZE 10
+void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
+{
+	char	*dst_bis;
+	char	*src_bis;
+	size_t	i;
 
-int		get_next_line(const int fd, char **line);
-#endif
+	i = 0;
+	dst_bis = (char *)dst;
+	src_bis = (char *)src;
+	while (i < n)
+	{
+		dst_bis[i] = src_bis[i];
+		if ((char)c == src_bis[i])
+			return (dst_bis + i + 1);
+		i++;
+	}
+	return (NULL);
+}

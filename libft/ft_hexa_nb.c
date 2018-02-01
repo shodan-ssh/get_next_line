@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   get_next_line.h                                  .::    .:/ .      .::   */
+/*   ft_isxdigit.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: almalfoy <almalfoy@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: almalfoy <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/11/28 18:06:57 by almalfoy     #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/01 15:06:42 by almalfoy    ###    #+. /#+    ###.fr     */
+/*   Created: 2017/12/03 13:28:00 by almalfoy     #+#   ##    ##    #+#       */
+/*   Updated: 2017/12/03 14:21:13 by almalfoy    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include "libft/libft.h"
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
+#include "libft.h"
 
-# define BUFF_SIZE 10
-
-int		get_next_line(const int fd, char **line);
-#endif
+int		ft_hexa_nb(int c)
+{
+	if ((c >= 0 && c <= 9) || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F'))
+		return (1);
+	return (0);
+}

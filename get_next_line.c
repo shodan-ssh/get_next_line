@@ -6,7 +6,7 @@
 /*   By: almalfoy <almalfoy@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/28 18:06:40 by almalfoy     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/31 18:52:22 by almalfoy    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/01 19:03:58 by almalfoy    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,25 +17,26 @@
 //|							Read qui prend directement stock_buf			 |
 /* -------------------------------------------------------------------------*/
 
-/*
 char	*ft_read_stock(const int fd, char **stock_buf)
 {
 	int				ret_read;
 	char			buf[BUFF_SIZE + 1];
-	char			stock[999];
+	char			*tmp;
 
-	*stock_buf = "";
+	*stock_buf = ft_strnew(1);
+	tmp = ft_strnew(1);
 	while ((ret_read = read(fd, buf, BUFF_SIZE)))
 	{
 		buf[ret_read] = '\0';
-		*stock_buf = ft_strjoin(*stock_buf, buf);
+		tmp = ft_strjoin(*stock_buf, buf);
+		free(stock_buf);
+		*stock_buf = tmp;
 	}
 	*stock_buf[ft_strlen(*stock_buf)] = '\0';
+	free(tmp);
 	return (*stock_buf);
 }
-*/
 
-/*
 int		get_next_line(const int fd, char **line)
 {
 
@@ -56,33 +57,34 @@ int		get_next_line(const int fd, char **line)
 	i++;
 	return (1);
 }
-*/
 
 /* -------------------------------------------------------------------------*/
 //|							Read qui return stock							 |
 /* -------------------------------------------------------------------------*/
-
+/*
 char	*ft_read_stock(const int fd)
 {
 	int				ret_read;
 	char			buf[BUFF_SIZE + 1];
 	char			*stock;
+	char			*tmp;
 
-	stock = "";
-	/*if (!(stock = (char *)malloc(sizeof(*stock) * (999))))
-		return (0);*/
+	stock = ""; //ft_strnew(1);
+	//tmp = ft_strnew(1);
 	while ((ret_read = read(fd, buf, BUFF_SIZE)))
 	{
 		buf[ret_read] = '\0';
-		stock = ft_strjoin(stock, buf);
+		//printf("%s", buf);
+		tmp = ft_strjoin(stock, buf);
+		stock = tmp;
 	}
-	stock[ft_strlen(stock)] = '\0';
+	//tmp[ft_strlen(tmp)] = '\0';
+	//stock = tmp;
 	return (stock);
 }
 
 int		get_next_line(const int fd, char **line)
 {
-
 	static int		i = 0;
 	int				start;
 	static char		*stock_buf;
@@ -100,3 +102,4 @@ int		get_next_line(const int fd, char **line)
 	i++;
 	return (1);
 }
+*/
