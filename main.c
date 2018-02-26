@@ -6,7 +6,7 @@
 /*   By: almalfoy <almalfoy@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/02 14:27:05 by almalfoy     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/30 17:34:30 by almalfoy    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/26 17:29:08 by almalfoy    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,22 +22,23 @@
 int		main(int argc, char **argv)
 {
 	int		fd;
-	int		i;
+	//int		ret;
 	char	*line;
 
 	(void)argc;
 	(void)argv;
-	i = 0;
 	fd = open(argv[1], O_RDONLY);
-	while (get_next_line(fd, &line))
+	/*while ((ret = get_next_line(fd, &line)))
 	{
 		printf("line = %s\n", line);
+		printf("ret = %d\n", ret);
 	}
-	//printf("retour gnl -> %d\nline -> %s\n", get_next_line(fd, &line), line);
-	/*printf("retour gnl -> %d\nline -> %s\n", get_next_line(fd, &line), line);
+	printf("ret apres boucle = %d\n", ret);*/
 	printf("retour gnl -> %d\nline -> %s\n", get_next_line(fd, &line), line);
 	printf("retour gnl -> %d\nline -> %s\n", get_next_line(fd, &line), line);
 	printf("retour gnl -> %d\nline -> %s\n", get_next_line(fd, &line), line);
-	*/
+	printf("retour gnl -> %d\nline -> %s\n", get_next_line(fd, &line), line);
+	printf("retour gnl -> %d\nline -> %s\n", get_next_line(fd, &line), line);
+	printf("retour gnl -> %d\nline -> %s\n", get_next_line(fd, &line), line);
 	return (0);
 }
